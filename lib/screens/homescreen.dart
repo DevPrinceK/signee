@@ -2,6 +2,7 @@
 
 import 'dart:typed_data';
 
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:signature/signature.dart';
@@ -117,7 +118,28 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Signee'),
+        leading: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: CircleAvatar(
+            backgroundColor: Colors.white,
+            child: Image.asset('assets/icons/playstore.png'),
+          ),
+        ),
+        title: DefaultTextStyle(
+          style: TextStyle(
+            fontSize: 30.0,
+            fontFamily: 'Bobbers',
+            color: Colors.purple[100],
+            fontWeight: FontWeight.bold,
+          ),
+          child: AnimatedTextKit(
+            animatedTexts: [
+              TypewriterAnimatedText(
+                's i g n e e',
+              ),
+            ],
+          ),
+        ),
         backgroundColor: Colors.purple[700],
         foregroundColor: Colors.purple[100],
       ),
@@ -137,12 +159,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   const SizedBox(width: 10),
-                  Text(
-                    'Welcome to Signee!',
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.purple[500]),
+                  AnimatedTextKit(
+                    animatedTexts: [
+                      TypewriterAnimatedText(
+                        'Welcome to Signee!',
+                        textStyle: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.purple[500],
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -184,7 +211,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                       child: const Text(
                         'Save Signature',
-                        style: TextStyle(fontSize: 18),
+                        style: TextStyle(fontSize: 16),
                       ),
                     ),
                   ),
@@ -204,7 +231,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                       child: const Text(
                         'Clear Signature',
-                        style: TextStyle(fontSize: 18),
+                        style: TextStyle(fontSize: 16),
                       ),
                     ),
                   ),
