@@ -127,12 +127,24 @@ class _HomeScreenState extends State<HomeScreen> {
           scrollDirection: Axis.vertical,
           child: Column(
             children: <Widget>[
-              const Text(
-                'Welcome to Signee!',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
+              Row(
+                children: [
+                  Text(
+                    "Hi, $name!",
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Text(
+                    'Welcome to Signee!',
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.purple[500]),
+                  ),
+                ],
               ),
               Card(
                 child: Container(
