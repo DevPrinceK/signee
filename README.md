@@ -1,6 +1,6 @@
 # signee
 
-A new Flutter project.
+A simple mobile app for taking, saving and sharing digital signatures.
 
 ## Getting Started
 
