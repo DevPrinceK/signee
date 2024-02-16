@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, use_build_context_synchronously
 
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
@@ -31,8 +31,29 @@ class _SignaturesScreenState extends State<SignaturesScreen> {
                 color: Colors.purple[700],
                 size: 40,
               ),
-              onPressed: () {
-                shareImage(sign);
+              onPressed: () async {
+                bool res = await shareImage(sign);
+                if (res) {
+                  Navigator.of(context).pop();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Center(child: Text('Image Shared')),
+                      duration: Duration(seconds: 2),
+                      behavior: SnackBarBehavior.floating,
+                      margin: EdgeInsets.all(10),
+                    ),
+                  );
+                } else {
+                  Navigator.of(context).pop();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Center(child: Text('Image Not Shared')),
+                      duration: Duration(seconds: 2),
+                      behavior: SnackBarBehavior.floating,
+                      margin: EdgeInsets.all(10),
+                    ),
+                  );
+                }
               },
             ),
             IconButton(

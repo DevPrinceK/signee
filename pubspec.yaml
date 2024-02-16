@@ -22,7 +22,7 @@ dependencies:
   hive_flutter:
   signature:
   intro_screen_onboarding_flutter:
-  share_plus:
+  share_plus: ^7.1.0
   path_provider:
   
 

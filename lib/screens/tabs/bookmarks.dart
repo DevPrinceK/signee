@@ -1,9 +1,10 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, use_build_context_synchronously
 
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:signee/data/sharing.dart';
 
 class BookmarsScreen extends StatefulWidget {
   const BookmarsScreen({super.key});
@@ -45,9 +46,31 @@ class _BookmarsScreenState extends State<BookmarsScreen> {
                 color: Colors.purple[700],
                 size: 40,
               ),
-              onPressed: () {},
+              onPressed: () async {
+                bool res = await shareImage(sign);
+                if (res) {
+                  Navigator.of(context).pop();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Center(child: Text('Image Shared')),
+                      duration: Duration(seconds: 2),
+                      behavior: SnackBarBehavior.floating,
+                      margin: EdgeInsets.all(10),
+                    ),
+                  );
+                } else {
+                  Navigator.of(context).pop();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Center(child: Text('Image Not Shared')),
+                      duration: Duration(seconds: 2),
+                      behavior: SnackBarBehavior.floating,
+                      margin: EdgeInsets.all(10),
+                    ),
+                  );
+                }
+              },
             ),
-            // const Spacer(),
             IconButton(
               icon: Icon(
                 isFavourite
@@ -60,7 +83,6 @@ class _BookmarsScreenState extends State<BookmarsScreen> {
                 Navigator.of(context).pop();
               },
             ),
-            // const Spacer(),
             IconButton(
               icon: const Icon(
                 Icons.cancel_rounded,

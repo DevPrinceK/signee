@@ -1,8 +1,11 @@
 // ignore_for_file: avoid_print, use_build_context_synchronously
 
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:signature/signature.dart';
+import 'package:signee/data/sharing.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -217,8 +220,42 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.purple[500],
         shape: const CircleBorder(),
-        onPressed: () {
-          _showNameDialog();
+        onPressed: () async {
+          if (controller.isEmpty) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Center(child: Text('Signature is empty')),
+                duration: Duration(seconds: 3),
+                behavior: SnackBarBehavior.floating,
+                margin: EdgeInsets.all(10),
+              ),
+            );
+            return;
+          } else {
+            Uint8List? imgbyt = await controller.toPngBytes();
+            bool res = await shareImage(imgbyt!);
+            if (res) {
+              Navigator.of(context).pop();
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Center(child: Text('Image Shared')),
+                  duration: Duration(seconds: 2),
+                  behavior: SnackBarBehavior.floating,
+                  margin: EdgeInsets.all(10),
+                ),
+              );
+            } else {
+              Navigator.of(context).pop();
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Center(child: Text('Image Not Shared')),
+                  duration: Duration(seconds: 2),
+                  behavior: SnackBarBehavior.floating,
+                  margin: EdgeInsets.all(10),
+                ),
+              );
+            }
+          }
         },
         child: Icon(
           Icons.share,
