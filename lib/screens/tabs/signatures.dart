@@ -3,6 +3,7 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:signee/data/sharing.dart';
 
 class SignaturesScreen extends StatefulWidget {
   const SignaturesScreen({super.key});
@@ -30,9 +31,10 @@ class _SignaturesScreenState extends State<SignaturesScreen> {
                 color: Colors.purple[700],
                 size: 40,
               ),
-              onPressed: () {},
+              onPressed: () {
+                shareImage(sign);
+              },
             ),
-            // const Spacer(),
             IconButton(
               icon: Icon(
                 isFavourite
@@ -45,7 +47,6 @@ class _SignaturesScreenState extends State<SignaturesScreen> {
                 addFavorite(id);
               },
             ),
-            // const Spacer(),
             IconButton(
               icon: const Icon(
                 Icons.cancel_rounded,
@@ -68,6 +69,18 @@ class _SignaturesScreenState extends State<SignaturesScreen> {
     var signatures = mybox.get('signatures').toList();
     signatures[id]['favourite'] = true;
     mybox.put('signatures', signatures);
+
+    // snackbar
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Center(child: Text('Added to Favorites')),
+        duration: Duration(seconds: 2),
+        behavior: SnackBarBehavior.floating,
+        margin: EdgeInsets.all(10),
+      ),
+    );
+
+    Navigator.of(context).pop();
   }
 
   void getSignatures() {
@@ -83,7 +96,6 @@ class _SignaturesScreenState extends State<SignaturesScreen> {
         // Handle the case where the signature is not in the expected format
         print('Unexpected format: $rawSignature');
         // convert the signature to the expected format
-        var casted = rawSignature as Map;
         convertedSignatures.add(rawSignature.cast<String, dynamic>());
       }
     }
