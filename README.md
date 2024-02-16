@@ -2,15 +2,19 @@
 
 A simple mobile app for taking, saving and sharing digital signatures.
 
-## Getting Started
+## Featured Screens
+![Loading Screen](assets/screenshots/loading.png)
 
-This project is a starting point for a Flutter application.
+![Onboarding Screen](assets/screenshots/onboarding.png)
 
-A few resources to get you started if this is your first Flutter project:
+![Home Screen - Empty](assets/screenshots/home-mty.png)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+![Home Screen - Full](assets/screenshots/home-full.png)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![Signatures List](assets/screenshots/signatures.png)
+
+![Signature Details](assets/screenshots/details.png)
+
+![Share Signature](assets/screenshots/share.png)
+
+![Favourite Signatures](assets/screenshots/favs.png)
