@@ -22,6 +22,9 @@ dependencies:
   hive_flutter:
   signature:
   intro_screen_onboarding_flutter:
+  share_plus:
+  path_provider:
+  
 
 dev_dependencies:
   flutter_test:
