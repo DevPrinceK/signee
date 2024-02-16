@@ -27,7 +27,6 @@ class _BookmarsScreenState extends State<BookmarsScreen> {
       favSigns = filteredSigns;
       allsigns = signs;
     });
-    
   }
 
   void _showDetails(name, sign, date, id, isFavourite) {
@@ -37,63 +36,72 @@ class _BookmarsScreenState extends State<BookmarsScreen> {
       builder: (BuildContext context) {
         return AlertDialog(
           contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-          title: Text(name),
-          content: Image.memory(sign, height: 300, width: 300),
-          actions: [
-            IconButton(
-              icon: Icon(
-                Icons.share,
-                color: Colors.purple[700],
-                size: 40,
-              ),
-              onPressed: () async {
-                bool res = await shareImage(sign);
-                if (res) {
-                  Navigator.of(context).pop();
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Center(child: Text('Image Shared')),
-                      duration: Duration(seconds: 2),
-                      behavior: SnackBarBehavior.floating,
-                      margin: EdgeInsets.all(10),
+          title: Center(child: Text(name)),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Image.memory(sign, height: 300, width: 300),
+              Divider(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  IconButton(
+                    icon: Icon(
+                      Icons.share,
+                      color: Colors.purple[700],
+                      size: 40,
                     ),
-                  );
-                } else {
-                  Navigator.of(context).pop();
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Center(child: Text('Image Not Shared')),
-                      duration: Duration(seconds: 2),
-                      behavior: SnackBarBehavior.floating,
-                      margin: EdgeInsets.all(10),
+                    onPressed: () async {
+                      bool res = await shareImage(sign);
+                      if (res) {
+                        Navigator.of(context).pop();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Center(child: Text('Image Shared')),
+                            duration: Duration(seconds: 2),
+                            behavior: SnackBarBehavior.floating,
+                            margin: EdgeInsets.all(10),
+                          ),
+                        );
+                      } else {
+                        Navigator.of(context).pop();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Center(child: Text('Image Not Shared')),
+                            duration: Duration(seconds: 2),
+                            behavior: SnackBarBehavior.floating,
+                            margin: EdgeInsets.all(10),
+                          ),
+                        );
+                      }
+                    },
+                  ),
+                  IconButton(
+                    icon: Icon(
+                      isFavourite
+                          ? Icons.favorite_rounded
+                          : Icons.favorite_outline_rounded,
+                      color: Colors.red,
+                      size: 40,
                     ),
-                  );
-                }
-              },
-            ),
-            IconButton(
-              icon: Icon(
-                isFavourite
-                    ? Icons.favorite_rounded
-                    : Icons.favorite_outline_rounded,
-                color: Colors.red,
-                size: 40,
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  IconButton(
+                    icon: const Icon(
+                      Icons.cancel_rounded,
+                      color: Colors.red,
+                      size: 40,
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
               ),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            IconButton(
-              icon: const Icon(
-                Icons.cancel_rounded,
-                color: Colors.red,
-                size: 40,
-              ),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
+            ],
+          ),
         );
       },
     );
