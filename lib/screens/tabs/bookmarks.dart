@@ -14,6 +14,7 @@ class BookmarsScreen extends StatefulWidget {
 
 class _BookmarsScreenState extends State<BookmarsScreen> {
   List favSigns = [];
+  List allsigns = [];
 
   void getFavSigns() async {
     // get the list of favourite favSigns
@@ -23,6 +24,7 @@ class _BookmarsScreenState extends State<BookmarsScreen> {
         signs.where((element) => element['favourite'] == true).toList();
     setState(() {
       favSigns = filteredSigns;
+      allsigns = signs;
     });
     print(favSigns);
   }
@@ -134,16 +136,20 @@ class _BookmarsScreenState extends State<BookmarsScreen> {
                   ),
                   Expanded(
                     child: ListView.builder(
-                      itemCount: favSigns.length,
+                      itemCount: allsigns.length,
                       itemBuilder: (context, index) {
+                        // skip if not favourite
+                        if (!allsigns[index]['favourite']) {
+                          return const SizedBox();
+                        }
                         return InkWell(
                           onTap: () {
                             _showDetails(
-                              favSigns[index]['name'],
-                              favSigns[index]['signature'] as Uint8List,
-                              favSigns[index]['date'],
+                              allsigns[index]['name'],
+                              allsigns[index]['signature'] as Uint8List,
+                              allsigns[index]['date'],
                               index,
-                              favSigns[index]['favourite'],
+                              allsigns[index]['favourite'],
                             );
                           },
                           child: Card(
@@ -163,7 +169,7 @@ class _BookmarsScreenState extends State<BookmarsScreen> {
                                       ClipRRect(
                                         borderRadius: BorderRadius.circular(50),
                                         child: Image.memory(
-                                          favSigns[index]['signature']
+                                          allsigns[index]['signature']
                                               as Uint8List,
                                           height: 50,
                                           width: 50,
@@ -174,13 +180,13 @@ class _BookmarsScreenState extends State<BookmarsScreen> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            "${favSigns[index]['name']}",
+                                            "${allsigns[index]['name']}",
                                             style: const TextStyle(
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.bold),
                                           ),
                                           Text(
-                                            "${favSigns[index]['date']}",
+                                            "${allsigns[index]['date']}",
                                             style: const TextStyle(
                                               fontSize: 16,
                                             ),
