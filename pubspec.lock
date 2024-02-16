@@ -552,6 +552,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.5.1"
+  print_slayer:
+    dependency: "direct dev"
+    description:
+      name: print_slayer
+      sha256: cc6634db707529910591d668263ea8834923f3c71d2c3d910afb0bfd106fc812
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
   pub_semver:
     dependency: transitive
     description:

@@ -33,6 +33,7 @@ dev_dependencies:
   flutter_lints: ^2.0.0
   hive_generator:
   build_runner:
+  print_slayer: ^1.0.1
 
 # The following section is specific to Flutter packages.
 flutter:

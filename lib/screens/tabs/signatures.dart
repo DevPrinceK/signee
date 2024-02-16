@@ -115,7 +115,7 @@ class _SignaturesScreenState extends State<SignaturesScreen> {
         convertedSignatures.add(rawSignature);
       } else {
         // Handle the case where the signature is not in the expected format
-        print('Unexpected format: $rawSignature');
+        
         // convert the signature to the expected format
         convertedSignatures.add(rawSignature.cast<String, dynamic>());
       }

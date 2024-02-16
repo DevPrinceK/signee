@@ -27,7 +27,7 @@ class _BookmarsScreenState extends State<BookmarsScreen> {
       favSigns = filteredSigns;
       allsigns = signs;
     });
-    print(favSigns);
+    
   }
 
   void _showDetails(name, sign, date, id, isFavourite) {

@@ -106,10 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
     var mybox = Hive.box('signee_db');
     signatures = mybox.get('signatures', defaultValue: []);
     var _name = mybox.get('name', defaultValue: '');
-    for (var sign in signatures) {
-      print(sign['name']);
-      print(sign['favourite']);
-    }
+    for (var sign in signatures) {}
     setState(() {
       signatures = signatures;
       name = _name;
